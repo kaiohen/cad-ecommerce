@@ -29,4 +29,23 @@ function verificarCampos() {
         this.submit(); // Envia o formulario após a validação
          }
   });
+   
+  const eNumero = (numero) => /^[0-9]+$/.test(numero);
+  const cepValido = (cep) => cep.length == 8 && eNumero(cep);
+   
+  const preencherFormulario = (endereco) => {
+    document.getElementById("logradouro").innerText = endereco.logradouro;
+    document.getElementById("bairro").innerText = endereco.bairro;
+    document.getElementById("localidade").innerText = endereco.localidade;
+    document.getElementById("uf").innerText = endereco.uf;
+  };
+  // Função assíncrona que pesquisa um CEP na API e exibe os dados no formulário
+  const pesquisarCep = async () => {
+    const cep = document.getElementById("cep");
+    const url = `https://viacep.com.br/ws/${cep.value}/json/`;
+    if (cepValido(cep.value)) {
+      const dados = await fetch(url);
+      // Busca dados na API
+      const addres = await dados.json();
+      //  Transforma a resposta da API em um objeto JavaScript utilizável
   
