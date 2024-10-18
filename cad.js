@@ -99,4 +99,13 @@ function verificarCampos() {
     }
     return true;
   }
-  
+  // Função para validar o e-mail
+  function checarEmail() {
+    const emailValue = document.forms[0].email.value;
+    if (emailValue === "" || !emailValue.includes("@") || !emailValue.includes(".")) {
+      alert("Por favor, informe um email válido");
+      return false;
+    } else {
+      return true;
+    }
+  }
