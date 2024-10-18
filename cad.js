@@ -48,4 +48,19 @@ function verificarCampos() {
       // Busca dados na API
       const addres = await dados.json();
       //  Transforma a resposta da API em um objeto JavaScript utilizável
-  
+   
+      // Verifica se há um erro nos dados
+      if (addres.hasOwnProperty("erro")) {
+        alert("Cep não encontrado");
+      } else {
+        preencherFormulario(addres);
+        // Exibe as informações no modal
+        const cepModal = new bootstrap.Modal(document.getElementById("cepModal"));
+        cepModal.show();
+      }
+    } else {
+      alert("CEP incorreto!");
+    }
+  };
+  //adiciona escutador para executar consumo de API da ViaCep
+  document.getElementById("consultarCep").addEventListener("click", pesquisarCep);
